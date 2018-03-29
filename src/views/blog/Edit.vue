@@ -72,7 +72,7 @@ export default {
     initEditor(){
       this.$nextTick(()=>{
         this.editor = new E(this.$refs.editor);
-        this.editor.customConfig.menus = ['bold','italic','underline'];
+        this.editor.customConfig.menus = ['bold','italic','underline','link','image'];
         this.editor.customConfig.zIndex = 0;
         this.editor.customConfig.onchange = (html)=>{
             // html 即变化之后的内容
