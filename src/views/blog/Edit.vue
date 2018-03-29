@@ -139,6 +139,12 @@ export default {
 .blog-content p,.blog-content div{
   margin: 15px 0;
 }
+.blog-content img{
+  max-width: 100%;
+  display: inline-block;
+  margin: 0 auto;
+}
+
 </style>
 
 <style lang="less" scoped>
