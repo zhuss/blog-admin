@@ -7,25 +7,34 @@
           <el-breadcrumb-item>编辑文章</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="form">
-      <el-form>
-        <el-form-item label="标题">
-            <el-input v-model="blog.title" :maxlength="30"></el-input>
-        </el-form-item>
-        <el-form-item label="作者">
-            <el-input v-model="blog.author" :maxlength="30"></el-input>
-        </el-form-item>
-        <el-form-item label="摘要">
-            <el-input v-model="blog.abstract" :maxlength="100"></el-input>
-        </el-form-item>
-        <el-form-item>
-            <div ref="editor"></div>
-        </el-form-item>
-        <el-form-item>
-          <el-button v-if="id" @click="saveBtnClick">保存</el-button>
-          <el-button v-else @click="createBtnClick">创建</el-button>
-        </el-form-item>
-      </el-form>
+    <div class="editor">
+      <div class="form">
+        <el-form>
+          <el-form-item label="标题">
+              <el-input v-model="blog.title" :maxlength="30"></el-input>
+          </el-form-item>
+          <el-form-item label="作者">
+              <el-input v-model="blog.author" :maxlength="30"></el-input>
+          </el-form-item>
+          <el-form-item label="摘要">
+              <el-input v-model="blog.abstract" :maxlength="100"></el-input>
+          </el-form-item>
+          <el-form-item>
+              <div ref="editor"></div>
+          </el-form-item>
+          <el-form-item>
+            <el-button v-if="id" @click="saveBtnClick">保存</el-button>
+            <el-button v-else @click="createBtnClick">创建</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div class="preview">
+          <p class="tag">预览</p>
+          <h2 class="title">{{blog.title}}</h2>
+          <div class="author">文 / {{blog.author}}</div>
+          <div class="abstract">{{blog.abstract}}</div>
+          <div class="content blog-content" v-html="blog.content"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -65,6 +74,10 @@ export default {
         this.editor = new E(this.$refs.editor);
         this.editor.customConfig.menus = ['bold','italic','underline'];
         this.editor.customConfig.zIndex = 0;
+        this.editor.customConfig.onchange = (html)=>{
+            // html 即变化之后的内容
+            this.blog.content = html;
+        }
         this.editor.create();
         //如果有id
         if(this.id){
@@ -122,11 +135,52 @@ export default {
   }
 }
 </script>
+<style>
+.blog-content p,.blog-content div{
+  margin: 15px 0;
+}
+</style>
+
 <style lang="less" scoped>
 .page-blog-edit{
-   >.form{
+   >.editor{
      padding: 30px;
-     width: 500px;
+     background: #FFF;
+     display: flex;
+     .form{
+       width: 500px;
+     }
+     .preview{
+       flex: 1;
+       background: #FFF;
+       padding: 0 30px;
+       .tag{
+         background: rgba(64,158,255,.1);
+         border: 1px solid rgba(64,158,255,.2);
+         color: #409eff;
+         padding: 5px 10px;
+       }
+       .title{
+         font-size: 20px;
+         font-weight: normal;
+         margin-top: 10px;
+       }
+       .author{
+         margin-top: 20px;
+         color: #999;
+       }
+       .abstract{
+         background: #EEE;
+         padding: 30px;
+         margin-top: 20px;
+         color: #666;
+         line-height: 26px;
+       }
+       .content{
+         margin-top: 20px;
+         word-break:break-all;
+       }
+     }
    }
 }
 </style>
