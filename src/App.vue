@@ -56,4 +56,19 @@ body{
 .w-e-text img.w-e-selected{
   border: none !important;
 }
+.w-e-text-container .w-e-panel-container{
+  box-shadow: none !important;
+  border: 1px solid #E6E6E6 !important;
+  border-top:none !important;
+}
+.w-e-text pre{
+  padding: 15px;
+  display: block;
+  background: #EEE;
+  overflow: auto;
+  border:1px solid #CCC;
+}
+.w-e-text pre code{
+  display: inline-block;
+}
 </style>

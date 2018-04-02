@@ -72,7 +72,7 @@ export default {
     initEditor(){
       this.$nextTick(()=>{
         this.editor = new E(this.$refs.editor);
-        this.editor.customConfig.menus = ['bold','italic','underline','link','image'];
+        this.editor.customConfig.menus = ['bold','italic','underline','link','image','code'];
         this.editor.customConfig.zIndex = 0;
         this.editor.customConfig.onchange = (html)=>{
             // html 即变化之后的内容
@@ -144,7 +144,13 @@ export default {
   display: inline-block;
   margin: 0 auto;
 }
-
+.blog-content pre{
+  padding: 15px;
+  display: block;
+  background: #EEE;
+  overflow: auto;
+  border:1px solid #CCC;
+}
 </style>
 
 <style lang="less" scoped>
@@ -158,6 +164,7 @@ export default {
      }
      .preview{
        flex: 1;
+       width: 0;
        background: #FFF;
        padding: 0 30px;
        .tag{
